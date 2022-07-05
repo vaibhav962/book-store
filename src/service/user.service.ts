@@ -15,7 +15,7 @@ class AuthService {
   }
 
   public async getAllRoles(): Promise<BaseList<Role[]>> {
-    const url = `${this.ENDPOINT}/Roles`;
+    const url = `https://helperland1.azurewebsites.net/api/User/Roles`;
     return request.get<BaseList<Role[]>>(url).then((res) => {
       return res.data;
     });
