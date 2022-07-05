@@ -5,7 +5,7 @@ import BaseList from "../models/BaseList";
 import UserModel, { AddOrEditUserModel } from "../models/UserModel";
 
 class AuthService {
-  ENDPOINT = "api/User";
+  ENDPOINT = "api/user";
 
   public async getAllUsers(params: FilterModel): Promise<BaseList<UserModel[]>> {
     const url = `${this.ENDPOINT}/list`;
@@ -15,7 +15,7 @@ class AuthService {
   }
 
   public async getAllRoles(): Promise<BaseList<Role[]>> {
-    const url = `https://helperland1.azurewebsites.net/api/User/Roles`;
+    const url = `${this.ENDPOINT}/Roles`;
     return request.get<BaseList<Role[]>>(url).then((res) => {
       return res.data;
     });
@@ -29,7 +29,7 @@ class AuthService {
   }
 
   public async delete(id: number): Promise<UserModel> {
-    const url = `${this.ENDPOINT}/Delete/${id}`;
+    const url = `${this.ENDPOINT}/delete/${id}`;
     return request.delete<UserModel>(url).then((res) => {
       return res.data;
     });
@@ -43,7 +43,7 @@ class AuthService {
   }
 
   public async updateProfile(data: UserModel): Promise<UserModel> {
-    const url = `${this.ENDPOINT}`;
+    const url = `${this.ENDPOINT}/update`;
     return request.put<UserModel>(url, data ).then((res) => {
       return res.data;
     });

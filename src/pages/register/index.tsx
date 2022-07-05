@@ -37,9 +37,9 @@ const Register: React.FC = () => {
 
   const getRoles = (): void => {
     userService.getAllRoles().then((res: BaseList<RoleModel[]>) => {
-      if (res.records.length) {
+      if (res.results.length) {
         setRoleList(
-          res.records.filter((role: RoleModel) => role.id !== Role.Admin)
+          res.results.filter((role: RoleModel) => role.id !== Role.Admin)
         );
       }
     });
