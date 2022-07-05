@@ -65,7 +65,7 @@ const Register: React.FC = () => {
 
   const onSubmit = async function (data: CreateUserModel) {
     console.log(data);
-    let result = await fetch("https://localhost:44369/register", {
+    let result = await fetch("https://localhost:44369/api/public/register", {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
