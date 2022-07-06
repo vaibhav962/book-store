@@ -12,9 +12,9 @@ class AuthService {
         });
     }
 
-    public async create(model: CreateUserModel): Promise<CreateUserModel> {
+    public async create(data: CreateUserModel): Promise<CreateUserModel> {
         const url = `${this.ENDPOINT}/register`;
-        return request.post<CreateUserModel>(url, model).then((res) => {
+        return request.post<CreateUserModel>(url, data ).then((res) => {
             return res.data;
         });
     }

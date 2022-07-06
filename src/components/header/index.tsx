@@ -8,8 +8,8 @@ import siteLogo from "../../assets/images/site-logo.svg";
 import cartIcon from "../../assets/images/cart.png";
 import searchIcon from "../../assets/images/search.png";
 import { TextField, Button } from "@material-ui/core";
-// import Shared from "../../utils/shared";
-// import { AuthContextModel, useAuthContext } from "../../context/auth";
+import Shared from "../../utils/shared";
+import { AuthContextModel, useAuthContext } from "../../context/auth";
 import { RoutePaths } from "../../utils/enum";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 
 const Header: React.FC = () => {
 	const classes = headerStyle();
-	// const authContext: AuthContextModel = useAuthContext();
+	const authContext: AuthContextModel = useAuthContext();
 	// const cartContext: CartContextModel = useCartContext();
 	const [open, setOpen] = useState<boolean>(false);
 	const [query, setquery] = useState<string>("");
@@ -33,15 +33,15 @@ const Header: React.FC = () => {
 		document.body.classList.toggle("open-menu");
 	};
 
-	// const items = useMemo(() => {
-	// 	return Shared.NavigationItems.filter(
-	// 		(item) =>
-	// 			!item.access.length || item.access.includes(authContext.user.roleId)
-	// 	);
-	// }, [authContext.user]);
+	const items = useMemo(() => {
+		return Shared.NavigationItems.filter(
+			(item) =>
+				!item.access.length || item.access.includes(authContext.user.roleId)
+		);
+	}, [authContext.user]);
 
 	const logOut = () => {
-		// authContext.signOut();
+		authContext.signOut();
 		// cartContext.emptyCart();
 	};
 
@@ -95,7 +95,7 @@ const Header: React.FC = () => {
 							<div className="nav-wrapper">
 								<div className="top-right-bar">
 									<List className="top-nav-bar">
-										{/* {!authContext.user.id && (
+										{!authContext.user.id && (
 											<>
 												<ListItem>
 													<Link to={RoutePaths.Login} title="Login">
@@ -108,14 +108,14 @@ const Header: React.FC = () => {
 													</Link>
 												</ListItem>
 											</>
-										)} */}
-										{/* {items.map((item, index: number) => (
+										)}
+										{items.map((item, index: number) => (
 											<ListItem key={index}>
 												<Link to={item.route} title={item.name}>
 													{item.name}
 												</Link>
 											</ListItem>
-										))} */}
+										))}
 									</List>
 									<List className="cart-country-wrap">
 										<ListItem className="cart-link">
@@ -130,13 +130,13 @@ const Header: React.FC = () => {
 										</ListItem>
 									</List>
 
-									{/* {authContext.user.id && (
+									{authContext.user.id && (
 										<List className="right">
 											<Button onClick={() => logOut()} variant="outlined">
 												Log out
 											</Button>
 										</List>
-									)} */}
+									)}
 								</div>
 							</div>
 						</div>

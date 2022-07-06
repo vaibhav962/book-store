@@ -4,8 +4,12 @@ import {
   Breadcrumbs,
   Link,
   Typography,
+  List,
+  ListItem,
   Button,
   TextField,
+  FormControlLabel,
+  Checkbox,
   FormControl,
   InputLabel,
   MenuItem,
@@ -15,10 +19,11 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import ValidationErrorMessage from "../../components/ValidationErrorMessage/index";
 import authService from "../../service/auth.service";
+import { StatusCode } from "./../../constant/constant";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CreateUserModel } from "../../models/AuthModel";
-import { Role, RoutePaths } from "../../utils/enum";
+import { Role } from "../../utils/enum";
 import RoleModel from "../../models/RoleModel";
 import { materialCommonStyles } from "../../utils/materialCommonStyles";
 import BaseList from "../../models/BaseList";
@@ -63,27 +68,12 @@ const Register: React.FC = () => {
     roleId: Yup.number().required("Role is required"),
   });
 
-  // const onSubmit = async function (data: CreateUserModel) {
-  //   console.log(data);
-  //   let result = await fetch("https://localhost:44369/api/public/register", {
-  //     method: 'POST',
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //   })
-
-  //   console.log("Result", result);
-  // };
-
   const onSubmit = (data: CreateUserModel): void => {
     authService.create(data).then((res) => {
-    history.push(RoutePaths.Login);
-    toast.success("Successfully registered");
-  });
-};
-
+      history.push("/login");
+      toast.success("Successfully registered");
+    });
+  };
   return (
     <div className={classes.createAccountWrapper}>
       <div className="create-account-page-wrapper">

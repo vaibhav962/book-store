@@ -15,7 +15,7 @@ class AuthService {
   }
 
   public async getAllRoles(): Promise<BaseList<Role[]>> {
-    const url = `${this.ENDPOINT}/Roles`;
+    const url = `${this.ENDPOINT}/roles`;
     return request.get<BaseList<Role[]>>(url).then((res) => {
       return res.data;
     });
@@ -43,7 +43,7 @@ class AuthService {
   }
 
   public async updateProfile(data: UserModel): Promise<UserModel> {
-    const url = `${this.ENDPOINT}/update`;
+    const url = `${this.ENDPOINT}`;
     return request.put<UserModel>(url, data ).then((res) => {
       return res.data;
     });
