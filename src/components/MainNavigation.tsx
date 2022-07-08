@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Book from "../pages/book";
 import BookList from "../pages/book-listing";
 import EditBook from "../pages/book/editBook";
+import Cart from "../pages/cart";
 import { RoutePaths } from "../utils/enum";
 import PrivateRoute from "./PrivateRoute";
 
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => {
 			<PrivateRoute exact path={RoutePaths.Book} component={Book} />
 			<PrivateRoute exact path={RoutePaths.AddBook} component={EditBook} />
 			<PrivateRoute exact path={RoutePaths.EditBook} component={EditBook} />
+			<PrivateRoute exact path={RoutePaths.Cart} component={Cart} />
 		</Switch>
 	);
 };
