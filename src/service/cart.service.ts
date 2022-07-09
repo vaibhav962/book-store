@@ -17,7 +17,7 @@ class CartService {
  }
 
  public async getList(id: number): Promise<GetCart> {
-  const url = `${this.ENDPOINT}/list?UserId=${id}`;
+  const url = `${this.ENDPOINT}/list2?UserId=${id}`;
   return request.get<GetCart>(url).then((res) => {
    return res.data;
   });
@@ -36,7 +36,7 @@ class CartService {
    }
 
  public async removeItem(id: number): Promise<CartModel> {
-  const url = `${this.ENDPOINT}?id=${id}`;
+  const url = `${this.ENDPOINT}/delete/${id}`;
   return request
    .delete<CartModel>(url)
    .then((res) => {

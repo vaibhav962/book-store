@@ -25,17 +25,17 @@ const Cart: React.FC = () => {
 	const getTotalPrice = (ItemList: CartList[]) => {
 		let totalPrice = 0;
 		ItemList.forEach((item: CartList) => {
-			const itemPrice = item.quantity * parseInt(item.book.price);
+			const itemPrice = item.quantity * item.price;
 			totalPrice = totalPrice + itemPrice;
 		});
 		setTotalPrice(totalPrice);
 	};
 
 	useEffect(() => {
-		setBookList(cartContext.cartData.records);
+		setBookList(cartContext.cartData.results);
 		setItemsInCart(cartContext.cartData.totalRecords);
-		getTotalPrice(cartContext.cartData.records);
-	}, [cartContext.cartData.records, cartContext.cartData.totalRecords]);
+		getTotalPrice(cartContext.cartData.results);
+	}, [cartContext.cartData.results, cartContext.cartData.totalRecords]);
 
 	const removeItem = async (id: number) => {
 		try {
@@ -60,19 +60,19 @@ const Cart: React.FC = () => {
 			.updateItem({
 				id: cartItem.id,
 				userId: cartItem.userId,
-				bookId: cartItem.book.id as number,
+				bookId: cartItem.id as number,
 				quantity,
 			})
 			.then((res) => {
 				if (res) {
 					const item: CartList | undefined = BookList.find(
-						(item) => item.book.id === cartItem.book.id
+						(item) => item.id === cartItem.id
 					);
 					if (item) {
 						e.target.closest(".qty-group").children[1].innerText = quantity;
 						const newPrice = inc
-							? TotalPrice + parseInt(item.book.price)
-							: TotalPrice - parseInt(item.book.price);
+							? TotalPrice + item.price
+							: TotalPrice - item.price;
 						setTotalPrice(newPrice);
 					}
 				}
@@ -85,7 +85,7 @@ const Cart: React.FC = () => {
 			if (userCart.totalRecords) {
 				try {
 					let cartIds: number[] = [];
-					userCart.records.forEach((element: CartList) => {
+					userCart.results.forEach((element: CartList) => {
 						cartIds.push(element.id);
 					});
 					const newOrder: OrderAddModel = {
@@ -123,18 +123,18 @@ const Cart: React.FC = () => {
 							<div className="cart-list-item" key={cartItem.id}>
 								<div className="cart-item-img">
 									<Link>
-										<img src={cartItem.book.base64image} alt="dummy-pic" />
+										<img src={cartItem.base64image} alt="dummy-pic" />
 									</Link>
 								</div>
 								<div className="cart-item-content">
 									<div className="cart-item-top-content">
 										<div className="cart-item-left">
-											<p className="brand">{cartItem.book.name}</p>
+											<p className="brand">{cartItem.name}</p>
 											<Link>Cart item name</Link>
 										</div>
 										<div className="price-block">
 											<span className="current-price">
-												MRP &#8377; {cartItem.book.price}
+												MRP &#8377; {cartItem.price}
 											</span>
 										</div>
 									</div>

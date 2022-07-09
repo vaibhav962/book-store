@@ -17,7 +17,7 @@ export interface CartContextModel {
 
 const initialState: CartContextModel = {
 	cartData: {
-		records: [],
+		results: [],
 		totalRecords: 0,
 	},
 	updateCart: () => {},
@@ -33,7 +33,7 @@ export const CartWrapper: React.FC<React.PropsWithChildren<{}>> = ({
 
 	const [cartData, setCartData] = useState<GetCart>({
 		totalRecords: 0,
-		records: [],
+		results: [],
 	});
 	useEffect(() => {
 		updateCart();
@@ -47,7 +47,7 @@ export const CartWrapper: React.FC<React.PropsWithChildren<{}>> = ({
 	const emptyCart = () => {
 		setCartData({
 			totalRecords: 0,
-			records: [],
+			results: [],
 		});
 	};
 	let value = {

@@ -1,5 +1,3 @@
-import { BookModel } from "./BookModel";
-
 export class CartModel {
  id?: number;
  userId!: number;
@@ -10,11 +8,14 @@ export class CartModel {
 export class CartList {
  id!: number;
  userId!: number;
- book!: BookModel;
+ bookId!: number;
  quantity!: number;
+ price!: number;
+ base64image!: string;
+ name!: string;
 }
 
 export class GetCart {
- records!: CartList[];
+ results!: CartList[];
  totalRecords!: number;
 }
